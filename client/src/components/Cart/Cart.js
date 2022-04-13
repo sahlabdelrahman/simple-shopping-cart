@@ -1,13 +1,17 @@
+import { useState } from "react";
 import "../../css/Cart/Cart.css";
+import Checkout from "../Checkout/Checkout";
 
 const Cart = (props) => {
+  const [showCheckoutForm, setShowCheckoutForm] = useState(false);
+
   return (
     <div className="cart-wrapper">
       <div className="cart-title">
         {props.cartItems.length === 0 ? (
           "Empty Cart"
         ) : (
-          <p>There is {props.cartItems.length} products in cart</p>
+          <p>There is {props.cartItems.length} Items in cart</p>
         )}
       </div>
       <div className="cart-items">
@@ -25,6 +29,22 @@ const Cart = (props) => {
           </div>
         ))}
       </div>
+      {props.cartItems.length !== 0 && (
+        <div className="cart-footer">
+          <div className="total">
+            Total: $
+            {props.cartItems.reduce((acc, p) => {
+              return acc + p.price;
+            }, 0)}
+          </div>
+          <button onClick={() => setShowCheckoutForm(true)}>
+            select products
+          </button>
+        </div>
+      )}
+      {showCheckoutForm && (
+        <Checkout setShowCheckoutForm={setShowCheckoutForm} />
+      )}
     </div>
   );
 };
