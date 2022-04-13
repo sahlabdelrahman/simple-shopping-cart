@@ -1,0 +1,23 @@
+.filter-wrapper {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #c0c0c0;
+  background-color: #fff;
+}
+.filter-wrapper .filter-title {
+  background-color: #2a5ea5;
+  color: #fff;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+.filter-wrapper > div {
+  padding: 5px 20px;
+  margin-bottom: 13px;
+}
+.filter-wrapper select {
+  display: block;
+  height: 40px;
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
