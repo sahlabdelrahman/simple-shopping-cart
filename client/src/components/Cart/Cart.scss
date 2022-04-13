@@ -2,6 +2,14 @@
     width: 70%;
     margin: 20px auto;
 
+    button {
+        border: 0;
+        background-color: #2a5ea5;
+        color: #fff;
+        padding: 7px;
+        border-radius: 6px;
+    }
+
     .cart-title {
         border-bottom: 1px solid #333;
         padding-bottom: 5px;
@@ -27,12 +35,18 @@
             flex: 1;
         }
 
-        button {
-            border: 0;
-            background-color: #2a5ea5;
-            color: #fff;
-            padding: 7px;
-            border-radius: 6px;
+        
+    }
+
+    .cart-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 30px 0;
+        .total {
+            font-size: 25px;
         }
     }
+
+    
 }
