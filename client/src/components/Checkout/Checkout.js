@@ -2,6 +2,8 @@ import { useState } from "react";
 import "../../css/Checkout/Checkout.css";
 import Input from "../Input/Input";
 
+import Zoom from "react-reveal/Zoom";
+
 const Checkout = (props) => {
   const [value, setValue] = useState("");
 
@@ -25,25 +27,27 @@ const Checkout = (props) => {
       >
         &times;
       </span>
-      <form>
-        <Input
-          type="text"
-          label="Name"
-          name="name"
-          handleChange={handleChange}
-        />
-        <Input
-          type="email"
-          label="Email"
-          name="email"
-          handleChange={handleChange}
-        />
-        <div>
-          <button type="submit" onClick={handleSubmit}>
-            Checkout
-          </button>
-        </div>
-      </form>
+      <Zoom>
+        <form>
+          <Input
+            type="text"
+            label="Name"
+            name="name"
+            handleChange={handleChange}
+          />
+          <Input
+            type="email"
+            label="Email"
+            name="email"
+            handleChange={handleChange}
+          />
+          <div>
+            <button type="submit" onClick={handleSubmit}>
+              Checkout
+            </button>
+          </div>
+        </form>
+      </Zoom>
     </div>
   );
 };
