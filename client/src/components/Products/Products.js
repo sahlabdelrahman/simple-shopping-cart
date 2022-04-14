@@ -7,7 +7,7 @@ import "../../css/Products/Products.css";
 
 import { fetchProducts } from "../../store/actions/products";
 
-const Products = ({ products, addToCart }) => {
+const Products = ({ addToCart }) => {
   const [product, setProduct] = useState("");
 
   const handleOpenModal = (product) => {
@@ -19,6 +19,7 @@ const Products = ({ products, addToCart }) => {
   };
 
   const dispatch = useDispatch();
+  const products = useSelector((state) => state.products.filteredProducts);
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -27,18 +28,19 @@ const Products = ({ products, addToCart }) => {
   return (
     <Bounce left cascade>
       <div className="products-wrapper">
-        {products.map((product) => (
-          <div key={product.id} className="products-item">
-            <a href="#" onClick={() => handleOpenModal(product)}>
-              <img src={product.imageUrl} alt={product.title} />
-            </a>
-            <div className="products-desc">
-              <p>{product.title}</p>
-              <span>${product.price}</span>
+        {products &&
+          products.map((product) => (
+            <div key={product.id} className="products-item">
+              <a href="#" onClick={() => handleOpenModal(product)}>
+                <img src={product.imageUrl} alt={product.title} />
+              </a>
+              <div className="products-desc">
+                <p>{product.title}</p>
+                <span>${product.price}</span>
+              </div>
+              <button onClick={() => addToCart(product)}>Add to cart</button>
             </div>
-            <button onClick={() => addToCart(product)}>Add to cart</button>
-          </div>
-        ))}
+          ))}
         <ProductModal product={product} handleCloseModal={handleCloseModal} />
       </div>
     </Bounce>
