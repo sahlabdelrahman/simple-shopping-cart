@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Bounce from "react-reveal";
+
 import ProductModal from "./ProductModal";
 import "../../css/Products/Products.css";
 
-import Bounce from "react-reveal";
+import { fetchProducts } from "../../store/actions/products";
 
 const Products = ({ products, addToCart }) => {
   const [product, setProduct] = useState("");
@@ -14,6 +17,12 @@ const Products = ({ products, addToCart }) => {
   const handleCloseModal = () => {
     setProduct("");
   };
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, [dispatch]);
 
   return (
     <Bounce left cascade>
