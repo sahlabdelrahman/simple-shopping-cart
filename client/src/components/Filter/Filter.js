@@ -1,20 +1,30 @@
+import { useDispatch, useSelector } from "react-redux";
+import { filterBySize, filterBySort } from "../../store/actions/products";
+
 import "../../css/Filter/Filter.css";
 
 import Bounce from "react-reveal";
 
-const Filter = (props) => {
+const Filter = () => {
+  const dispatch = useDispatch();
+  const { size, sort, filteredProducts } = useSelector(
+    (state) => state.products
+  );
+
   return (
     <Bounce right>
       <div className="filter-wrapper">
         <h2 className="filter-title">Filter</h2>
         <div className="filter-products-num">
-          Number of Products {props.numberOfProducts}
+          Number of Products {filteredProducts && filteredProducts.length}
         </div>
         <div className="filter-by-size">
           <span>Filter</span>
           <select
-            value={props.size}
-            onChange={props.handleFilterBySize}
+            value={size}
+            onChange={(e) => {
+              dispatch(filterBySize(filteredProducts, e.target.value));
+            }}
             className="filter-select"
           >
             <option value="ALL">ALL</option>
@@ -29,8 +39,10 @@ const Filter = (props) => {
         <div className="filter-by-size">
           <span>Order</span>
           <select
-            value={props.sort}
-            onChange={props.handleFilterBySort}
+            value={sort}
+            onChange={(e) =>
+              dispatch(filterBySort(filteredProducts, e.target.value))
+            }
             className="filter-select"
           >
             <option value="latest">Latest</option>
