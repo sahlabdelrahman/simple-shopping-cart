@@ -1,24 +1,30 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import "../../css/Cart/Cart.css";
 import Checkout from "../Checkout/Checkout";
 
 import Fade from "react-reveal/Fade";
+import { removeFromCart } from "../../store/actions/cart";
 
 const Cart = (props) => {
   const [showCheckoutForm, setShowCheckoutForm] = useState(false);
 
+  const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cart.cartItems);
+
   return (
     <div className="cart-wrapper">
       <div className="cart-title">
-        {props.cartItems.length === 0 ? (
+        {cartItems.length === 0 ? (
           "Empty Cart"
         ) : (
-          <p>There is {props.cartItems.length} Items in cart</p>
+          <p>There is {cartItems.length} Items in cart</p>
         )}
       </div>
       <Fade bottom cascade>
         <div className="cart-items">
-          {props.cartItems.map((item) => (
+          {cartItems.map((item) => (
             <div key={item.id} className="cart-item">
               <img src={item.imageUrl} alt={item.title} />
               <div className="cart-info">
@@ -27,7 +33,7 @@ const Cart = (props) => {
                   <p>qty: {item.qty}</p>
                   <p>Price: ${item.price}</p>
                 </div>
-                <button onClick={() => props.removeFromCart(item)}>
+                <button onClick={() => dispatch(removeFromCart(item))}>
                   Remove
                 </button>
               </div>
@@ -35,11 +41,11 @@ const Cart = (props) => {
           ))}
         </div>
       </Fade>
-      {props.cartItems.length !== 0 && (
+      {cartItems.length !== 0 && (
         <div className="cart-footer">
           <div className="total">
             Total: $
-            {props.cartItems.reduce((acc, p) => {
+            {cartItems.reduce((acc, p) => {
               return acc + p.price;
             }, 0)}
           </div>

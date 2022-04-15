@@ -6,8 +6,9 @@ import ProductModal from "./ProductModal";
 import "../../css/Products/Products.css";
 
 import { fetchProducts } from "../../store/actions/products";
+import { addToCart } from "../../store/actions/cart";
 
-const Products = ({ addToCart }) => {
+const Products = () => {
   const [product, setProduct] = useState("");
 
   const handleOpenModal = (product) => {
@@ -38,7 +39,9 @@ const Products = ({ addToCart }) => {
                 <p>{product.title}</p>
                 <span>${product.price}</span>
               </div>
-              <button onClick={() => addToCart(product)}>Add to cart</button>
+              <button onClick={() => dispatch(addToCart(product))}>
+                Add to cart
+              </button>
             </div>
           ))}
         <ProductModal product={product} handleCloseModal={handleCloseModal} />
