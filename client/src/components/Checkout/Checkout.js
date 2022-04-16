@@ -1,24 +1,9 @@
-import { useState } from "react";
 import "../../css/Checkout/Checkout.css";
 import Input from "../Input/Input";
 
 import Zoom from "react-reveal/Zoom";
 
 const Checkout = (props) => {
-  const [value, setValue] = useState("");
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(value);
-  };
-
-  const handleChange = (e) => {
-    setValue((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
-  };
-
   return (
     <div className="checkout-form">
       <span
@@ -33,16 +18,16 @@ const Checkout = (props) => {
             type="text"
             label="Name"
             name="name"
-            handleChange={handleChange}
+            handleChange={props.handleChange}
           />
           <Input
             type="email"
             label="Email"
             name="email"
-            handleChange={handleChange}
+            handleChange={props.handleChange}
           />
           <div>
-            <button type="submit" onClick={handleSubmit}>
+            <button type="submit" onClick={props.handleSubmit}>
               Checkout
             </button>
           </div>
