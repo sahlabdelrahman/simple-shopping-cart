@@ -2,22 +2,22 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import "../../css/Cart/Cart.css";
+import CartModal from "./CartModal";
 import Checkout from "../Checkout/Checkout";
 
 import Fade from "react-reveal/Fade";
 
 import { removeFromCart } from "../../store/actions/cart";
 import { clearOrder, createOrder } from "../../store/actions/order";
-import CartModal from "./CartModal";
+import { staticData } from "../../data/static-data";
 
-const Cart = (props) => {
+const Cart = () => {
   const [showCheckoutForm, setShowCheckoutForm] = useState(false);
+  const [value, setValue] = useState("");
 
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems);
   const order = useSelector((state) => state.order.order);
-
-  const [value, setValue] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -46,7 +46,9 @@ const Cart = (props) => {
         {cartItems.length === 0 ? (
           "Empty Cart"
         ) : (
-          <p>There is {cartItems.length} Items in cart</p>
+          <p>
+            {staticData.cartHeader}: {cartItems.length}{" "}
+          </p>
         )}
       </div>
 
@@ -64,11 +66,15 @@ const Cart = (props) => {
               <div className="cart-info">
                 <div>
                   <p>{item.title}</p>
-                  <p>qty: {item.qty}</p>
-                  <p>Price: ${item.price}</p>
+                  <p>
+                    {staticData.qty}: {item.qty}
+                  </p>
+                  <p>
+                    {staticData.price}: ${item.price}
+                  </p>
                 </div>
                 <button onClick={() => dispatch(removeFromCart(item))}>
-                  Remove
+                  {staticData.removeBtn}
                 </button>
               </div>
             </div>
@@ -84,7 +90,7 @@ const Cart = (props) => {
             }, 0)}
           </div>
           <button onClick={() => setShowCheckoutForm(true)}>
-            select products
+            {staticData.selectProducts}
           </button>
         </div>
       )}

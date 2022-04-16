@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Bounce from "react-reveal";
 
-import ProductModal from "./ProductModal";
 import "../../css/Products/Products.css";
+import ProductModal from "./ProductModal";
 
 import { fetchProducts } from "../../store/actions/products";
 import { addToCart } from "../../store/actions/cart";
+import { staticData } from "../../data/static-data";
 
 const Products = () => {
   const [product, setProduct] = useState("");
@@ -40,7 +41,7 @@ const Products = () => {
                 <span>${product.price}</span>
               </div>
               <button onClick={() => dispatch(addToCart(product))}>
-                Add to cart
+                {staticData.addToCart}
               </button>
             </div>
           ))}

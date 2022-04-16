@@ -2,6 +2,7 @@ import "../../css/Checkout/Checkout.css";
 import Input from "../Input/Input";
 
 import Zoom from "react-reveal/Zoom";
+import { staticData } from "../../data/static-data";
 
 const Checkout = (props) => {
   return (
@@ -16,19 +17,19 @@ const Checkout = (props) => {
         <form>
           <Input
             type="text"
-            label="Name"
+            label={staticData.name}
             name="name"
             handleChange={props.handleChange}
           />
           <Input
             type="email"
-            label="Email"
+            label={staticData.email}
             name="email"
             handleChange={props.handleChange}
           />
           <div>
             <button type="submit" onClick={props.handleSubmit}>
-              Checkout
+              {staticData.checkout}
             </button>
           </div>
         </form>
