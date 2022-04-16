@@ -1,25 +1,18 @@
 const express = require("express");
-const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 
-const router = require("./routes/router");
+const productsRouter = require("./routes/products.route");
+const ordersRouter = require("./routes/orders.route");
+const runDB = require("./config/runDB");
 
 const app = express();
 
 app.use(bodyParser());
 
-const connectionString = "mongodb://localhost/simple-shopping-cart";
+runDB();
 
-mongoose
-  .connect(connectionString, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then((res) => {
-    console.log("connected");
-  });
-
-app.use("/api/products", router);
+app.use("/api/products", productsRouter);
+app.use("/api/orders", ordersRouter);
 
 app.listen(3002, () => {
   console.log("Server is running");
