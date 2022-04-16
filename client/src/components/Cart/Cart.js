@@ -5,9 +5,9 @@ import "../../css/Cart/Cart.css";
 import Checkout from "../Checkout/Checkout";
 
 import Fade from "react-reveal/Fade";
-import Modal from "react-modal";
 
 import { removeFromCart } from "../../store/actions/cart";
+import CartModal from "./CartModal";
 
 const Cart = (props) => {
   const [showCheckoutForm, setShowCheckoutForm] = useState(false);
@@ -43,43 +43,13 @@ const Cart = (props) => {
           <p>There is {cartItems.length} Items in cart</p>
         )}
       </div>
-      <Modal isOpen={order} onRequestClose={() => handleCloseModal()}>
-        <span className="close-icon" onClick={() => handleCloseModal()}>
-          &times;
-        </span>
-        <div className="order-info">
-          <p className="order-success">order done successfully</p>
-          <table>
-            <tr>
-              <td>Name: </td>
-              <td>{order.name}</td>
-            </tr>
-            <tr>
-              <td>Email: </td>
-              <td>{order.email}</td>
-            </tr>
-            <tr>
-              <td>Total: </td>
-              <td>
-                {cartItems.reduce((a, p) => {
-                  return a + p.price;
-                }, 0)}
-              </td>
-            </tr>
-            <tr>
-              <td>Selected Items: </td>
-              <td>
-                {cartItems.map((item) => (
-                  <>
-                    <p>Number of this products: {item.qty}</p>
-                    <p>Title of product: {item.title}</p>
-                  </>
-                ))}
-              </td>
-            </tr>
-          </table>
-        </div>
-      </Modal>
+
+      <CartModal
+        cartItems={cartItems}
+        order={order}
+        handleCloseModal={handleCloseModal}
+      />
+
       <Fade bottom cascade>
         <div className="cart-items">
           {cartItems.map((item) => (
