@@ -7,6 +7,7 @@ import Checkout from "../Checkout/Checkout";
 import Fade from "react-reveal/Fade";
 
 import { removeFromCart } from "../../store/actions/cart";
+import { clearOrder, createOrder } from "../../store/actions/order";
 import CartModal from "./CartModal";
 
 const Cart = (props) => {
@@ -14,13 +15,17 @@ const Cart = (props) => {
 
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems);
+  const order = useSelector((state) => state.order.order);
 
   const [value, setValue] = useState("");
-  const [order, setOrder] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setOrder(value);
+    const order = {
+      name: value.name,
+      email: value.email,
+    };
+    dispatch(createOrder(order));
   };
 
   const handleChange = (e) => {
@@ -31,7 +36,8 @@ const Cart = (props) => {
   };
 
   const handleCloseModal = () => {
-    setOrder(false);
+    dispatch(clearOrder());
+    setShowCheckoutForm(false);
   };
 
   return (
