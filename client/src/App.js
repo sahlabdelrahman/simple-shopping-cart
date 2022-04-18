@@ -1,19 +1,21 @@
 import Header from "./components/Header/Header";
-import Products from "./components/Products/Products";
-import Filter from "./components/Filter/Filter";
-import Cart from "./components/Cart/Cart";
+import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
+import { Route, Routes } from "react-router-dom";
+
+import Home from "./pages/Home/Home";
+import Orders from "./pages/Orders/Orders";
 
 function App() {
   return (
     <div className="layout">
       <Header />
       <main>
-        <div className="wrapper">
-          <Products />
-          <Filter />
-        </div>
-        <Cart />
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} exact />
+          <Route path="/orders" element={<Orders />} />
+        </Routes>
       </main>
       <Footer />
     </div>

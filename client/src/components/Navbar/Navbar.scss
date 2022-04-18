@@ -1,0 +1,19 @@
+nav ul {
+    display: flex;
+    padding: 10px 35px;
+    background-color: #ddd;
+    list-style: none;
+
+    li a {
+        display: block;
+        background-color: gray;
+        color: #fff;
+        padding: 5px 10px;
+        margin-right: 5px;
+        text-decoration: none;
+
+        &.active {
+            background-color: #2a5ea5;
+        }
+    }
+}
