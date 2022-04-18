@@ -1,0 +1,17 @@
+.orders-page {
+  width: 100%;
+}
+.orders-page table {
+  width: 100%;
+}
+.orders-page table thead {
+  background-color: #000;
+  color: #fff;
+}
+.orders-page table thead th {
+  padding: 10px;
+}
+.orders-page table tbody tr td {
+  padding: 10px;
+  border-bottom: 1px solid #f0f0f0;
+}
