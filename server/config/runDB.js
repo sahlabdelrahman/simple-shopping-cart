@@ -4,7 +4,7 @@ const connectionString = "mongodb://localhost/simple-shopping-cart";
 
 function runDB() {
   mongoose
-    .connect(connectionString, {
+    .connect(process.env.MONGODB_URI || connectionString, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     })
